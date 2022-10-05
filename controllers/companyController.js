@@ -2,12 +2,15 @@ const asyncHandler = require('express-async-handler')
 const Company = require('../models/company.model')
 
 const getCompanyByArea = asyncHandler(async (req, res) => {
-    console.log(typeof(req.params.area))
     const companies = await Company.find({'area': req.params.area}).collation( { locale: 'en', strength: 1 } )
     res.json(companies)
 })
 
-// create a company
+const getCompanyByCategory = asyncHandler(async (req, res) => {
+    console.log(req.params.category)
+    const companies = await Company.find({'category': req.params.category})
+    res.json(companies)
+})
 
 const createCompany = asyncHandler(async (req, res) => {
     const {title, description, category, area} = req.body
@@ -32,4 +35,4 @@ const createCompany = asyncHandler(async (req, res) => {
 
 
 
-module.exports = { createCompany, getCompanyByArea }
+module.exports = { createCompany, getCompanyByArea, getCompanyByCategory }
