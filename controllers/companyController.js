@@ -2,7 +2,8 @@ const asyncHandler = require('express-async-handler')
 const Company = require('../models/company.model')
 
 const getCompanyByArea = asyncHandler(async (req, res) => {
-    const companies = await Company.find({'area': req.params.area})
+    console.log(typeof(req.params.area))
+    const companies = await Company.find({'area': req.params.area}).collation( { locale: 'en', strength: 1 } )
     res.json(companies)
 })
 
