@@ -9,9 +9,13 @@ const companySchema = mongoose.Schema({
     },
     category: {
         type: String,
-        enum: ['veg', 'bake', 'milk','ice']
-    }
-    ,
+        enum: ['veg', 'bake', 'milk','ice'],
+        required: true
+    },
+    area: {
+        type: String,
+        required: true
+    },
     user:{
         type: mongoose.Schema.Types.ObjectId,
         required:true,
