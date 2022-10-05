@@ -1,21 +1,10 @@
 const asyncHandler = require('express-async-handler')
 const Company = require('../models/company.model')
 
-// const getTasks = asyncHandler(async (req, res) => {
-//     const tasks = await Task.find()
-//     res.json(tasks)
-// })
-
-
-// const getTaskById = asyncHandler(async (req, res) => {
-//     const task = await Task.findById(req.params.id)
-
-//     if (task) {
-//         res.json(task)
-//     } else {
-//         res.status(400).json({message:"Task not found"})
-//     }
-// })
+const getCompanyByArea = asyncHandler(async (req, res) => {
+    const companies = await Company.find({'area': req.params.area})
+    res.json(companies)
+})
 
 // create a company
 
@@ -42,4 +31,4 @@ const createCompany = asyncHandler(async (req, res) => {
 
 
 
-module.exports = { createCompany}
+module.exports = { createCompany, getCompanyByArea }
