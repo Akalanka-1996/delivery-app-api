@@ -18,7 +18,9 @@ app.use(morgan('tiny'))
 connectDB()
 
 //load routes
+const userRouter = require('./routes/users')
 
+app.use('/api/users', userRouter)
 
 app.listen(PORT, ()=>{
     console.log(`Server is running on port:${PORT}`)
