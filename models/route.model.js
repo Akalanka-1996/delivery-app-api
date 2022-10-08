@@ -8,7 +8,7 @@ const routeSchema = mongoose.Schema({
         type: String
     },
     startTime: {
-        type: Date
+        type: Number
     },
     lanes: [{
         type: mongoose.Schema.Types.ObjectId,
