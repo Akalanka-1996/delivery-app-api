@@ -3,23 +3,24 @@ const Lane = require('../models/lane.model')
 const Route = require('../models/route.model')
 
 const createLane = asyncHandler(async (req, res) => {
-    const { lane, estimatedTime} = req.body
+    const { lane, estimatedTime, routeId} = req.body
 
     if (!lane || !estimatedTime) {
         res.status(400)
         throw new Error("Please fill all the fields")
     } else {
-        const lane = new Lane({
+        const routeLane = new Lane({
             user: req.user._id,
             lane,
-            estimatedTime
+            estimatedTime,
+            routeId
         })
 
-        const createdLane = await lane.save()
+        const createdLane = await routeLane.save()
         .then((result) => {
             Route.findById((routeId), (err, route) => {
                 if(route) {
-                    route.lanes.push(lane)
+                    route.lanes.push(routeLane)
                     route.save()
                     res.json({message:"Lane created"})
                 }
@@ -29,8 +30,6 @@ const createLane = asyncHandler(async (req, res) => {
         .catch((error) => {
             res.status(500).json({error})
         })
-
-        res.status(201).json(createdLane)
     }
 })
 
