@@ -2,7 +2,7 @@ const asyncHandler = require('express-async-handler')
 const Route = require('../models/route.model')
 
 const createRoute = asyncHandler(async (req, res) => {
-    const {area, startPoint, startTime } = req.body
+    const {area, startPoint, startTime, company } = req.body
 
     if (!area || !startPoint) {
         res.status(400)
@@ -12,7 +12,8 @@ const createRoute = asyncHandler(async (req, res) => {
             user: req.user._id,
             area,
             startPoint,
-            startTime
+            startTime,
+            company
         })
 
         const createdRoute = await route.save()
@@ -21,6 +22,17 @@ const createRoute = asyncHandler(async (req, res) => {
     }
 })
 
+const getCompanyRoute = asyncHandler(async (req, res) => {
+    const route = await Route.find({'company': req.params.company})
+    if(route){
+        res.json(route)
+    } else {
+        res.status(404)
+        throw new Error("Route not found")
+    }
+
+})
 
 
-module.exports = { createRoute }
+
+module.exports = { createRoute, getCompanyRoute }
