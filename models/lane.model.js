@@ -4,6 +4,7 @@ const laneSchema = mongoose.Schema({
     lane: {
         type: String
     },
+    
     estimatedTime: {
         type: Number
     },

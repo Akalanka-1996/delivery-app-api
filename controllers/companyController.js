@@ -7,8 +7,12 @@ const getCompanyByArea = asyncHandler(async (req, res) => {
 })
 
 const getCompanyByCategory = asyncHandler(async (req, res) => {
-    console.log(req.params.category)
     const companies = await Company.find({'category': req.params.category})
+    res.json(companies)
+})
+
+const getCompanyFromUser = asyncHandler(async (req, res) => {
+    const companies = await Company.find({'area': req.params.area, 'category': req.params.category}).collation( { locale: 'en', strength: 1 } )
     res.json(companies)
 })
 
@@ -35,4 +39,4 @@ const createCompany = asyncHandler(async (req, res) => {
 
 
 
-module.exports = { createCompany, getCompanyByArea, getCompanyByCategory }
+module.exports = { createCompany, getCompanyByArea, getCompanyByCategory, getCompanyFromUser }
