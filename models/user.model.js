@@ -32,6 +32,11 @@ const userSchema = new Schema({
     lane: {
         type: String
     },
+    isSupplier: {
+        type: Boolean,
+        default: false,
+        required: true
+    }
 
 },{
     timestamps:true
