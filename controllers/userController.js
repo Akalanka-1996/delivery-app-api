@@ -22,7 +22,12 @@ const registerUser = asyncHandler(async (req, res) => {
     if (user) {
 
         res.status(201).json({
-            token:generateToken(user._id)
+            _id:user._id,
+            name:user.name,
+            email:user.email,
+            isSupplier: user.isSupplier,
+            token:generateToken(user._id),
+
         })
         console.log("User added!");
     }
