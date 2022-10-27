@@ -1,6 +1,11 @@
 const asyncHandler = require('express-async-handler')
 const Company = require('../models/company.model')
 
+const getUserCompanies = asyncHandler(async (req, res) => {
+    const companies = await Company.find({ user: req.user._id })
+    res.json(companies)
+})
+
 const getCompanyByArea = asyncHandler(async (req, res) => {
     const companies = await Company.find({'area': req.params.area}).collation( { locale: 'en', strength: 1 } )
     res.json(companies)
@@ -39,4 +44,4 @@ const createCompany = asyncHandler(async (req, res) => {
 
 
 
-module.exports = { createCompany, getCompanyByArea, getCompanyByCategory, getCompanyFromUser }
+module.exports = { createCompany, getCompanyByArea, getCompanyByCategory, getCompanyFromUser, getUserCompanies}
