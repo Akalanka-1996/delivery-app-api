@@ -33,6 +33,16 @@ const getCompanyRoute = asyncHandler(async (req, res) => {
 
 })
 
+const getRouteWithPopulate = asyncHandler(async (req, res) => {
+    const routes = await Route.find({'company': req.params.company}).populate('lanes')
+    if(routes) {
+        res.json(routes)
+    } else {
+        res.status(404)
+        throw new Error("Not found")
+    }
+})
 
 
-module.exports = { createRoute, getCompanyRoute }
+
+module.exports = { createRoute, getCompanyRoute, getRouteWithPopulate }
