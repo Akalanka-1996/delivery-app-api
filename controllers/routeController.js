@@ -84,11 +84,33 @@ const followRoute = asyncHandler(async (req, res) => {
         route.followers.push(user)
         const updatedRoute = await route.save()
         res.json(updatedRoute)
+    } else {
+        res.status(404)
+        throw new Error('Route not found!')
     }
     
 
 })
 
+const getFollowersCount = asyncHandler(async (req, res) => {
+    const route = await Route.findById(req.params.id)
+
+    let followCount = 0;
+
+    if (route) {
+        followCount = await route.followers.length
+        console.log(followCount)
+        res.json(followCount)
 
 
-module.exports = { createRoute, getCompanyRoute, getRouteWithPopulate, startJourney, getRouteById, followRoute }
+    } else {
+        res.status(404)
+        throw new Error('Route not found!')
+    }
+
+    // return route
+})
+
+
+
+module.exports = { createRoute, getCompanyRoute, getRouteWithPopulate, startJourney, getRouteById, followRoute, getFollowersCount }
