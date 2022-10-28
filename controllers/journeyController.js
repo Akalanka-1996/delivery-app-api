@@ -5,13 +5,14 @@ const Route = require('../models/route.model')
 const startJourney = asyncHandler(async (req, res) => {
     const route = await Route.find({'route': req.params.route})
 
-    const {date, isStarted} = req.body
+    const { isStarted} = req.body
 
     if(route) {
         const journey = new Journey({
             user: req.user._id,
             date, 
-            isStarted
+            isStarted, 
+            route
         })
 
         const createdJourney = await journey.save()

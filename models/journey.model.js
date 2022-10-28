@@ -1,9 +1,9 @@
 const mongoose = require('mongoose')
 
 const journeySchema = mongoose.Schema({
-    date: {
-        type: Date
-    },
+    // date: {
+    //     type: Date
+    // },
     isStarted: {
         type: Boolean,
         default: false

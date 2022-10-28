@@ -24,6 +24,17 @@ const routeSchema = mongoose.Schema({
         required: true,
         ref: "Company"
     },
+    isStarted: {
+        type: Boolean,
+        default: false
+    },
+    vehilceType: {
+        type: String,
+        
+    },
+    vehicleNumber: {
+        type: String
+    }
 },{
     timestamps:true
 })

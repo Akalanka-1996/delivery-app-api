@@ -43,6 +43,38 @@ const getRouteWithPopulate = asyncHandler(async (req, res) => {
     }
 })
 
+const startJourney = asyncHandler(async (req, res) => {
+    const route = await Route.findById(req.params.id)
+
+    const {vehilceType, vehicleNumber} = req.body
+
+    console.log(route)
+
+    if (route) {
+        route.vehilceType = vehilceType
+        route.vehicleNumber = vehicleNumber
+        route.isStarted = true
+
+    const updatedRoute = await route.save()
+    console.log(updatedRoute)
+    res.json(updatedRoute)
+    } else {
+        res.status(404);
+        throw new Error("Route not found");
+    }
+})
+
+const getRouteById = asyncHandler( async (req, res) => {
+    const route = await Route.findById(req.params.id)
+
+    if (route) {
+        res.json(route)
+    } else {
+        res.status(404)
+        throw new Error('Route not found!')
+    }
+})
 
 
-module.exports = { createRoute, getCompanyRoute, getRouteWithPopulate }
+
+module.exports = { createRoute, getCompanyRoute, getRouteWithPopulate, startJourney, getRouteById }
