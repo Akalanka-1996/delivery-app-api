@@ -75,6 +75,20 @@ const getRouteById = asyncHandler( async (req, res) => {
     }
 })
 
+const followRoute = asyncHandler(async (req, res) => {
+    const route = await Route.findById(req.params.id)
+
+    const {user} = req.body
+
+    if (route) {
+        route.followers.push(user)
+        const updatedRoute = await route.save()
+        res.json(updatedRoute)
+    }
+    
+
+})
 
 
-module.exports = { createRoute, getCompanyRoute, getRouteWithPopulate, startJourney, getRouteById }
+
+module.exports = { createRoute, getCompanyRoute, getRouteWithPopulate, startJourney, getRouteById, followRoute }

@@ -34,7 +34,10 @@ const routeSchema = mongoose.Schema({
     },
     vehicleNumber: {
         type: String
-    }
+    },
+    followers: [
+        
+    ],
 },{
     timestamps:true
 })
