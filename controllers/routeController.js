@@ -2,15 +2,15 @@ const asyncHandler = require('express-async-handler')
 const Route = require('../models/route.model')
 
 const createRoute = asyncHandler(async (req, res) => {
-    const {area, startPoint, startTime, company } = req.body
+    const {title, startPoint, startTime, company } = req.body
 
-    if (!area || !startPoint) {
+    if (!title || !startPoint) {
         res.status(400)
         throw new Error("Please fill all the fields")
     } else {
         const route = new Route({
             user: req.user._id,
-            area,
+            title,
             startPoint,
             startTime,
             company

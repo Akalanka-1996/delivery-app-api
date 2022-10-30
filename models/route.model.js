@@ -1,7 +1,7 @@
 const mongoose = require('mongoose')
 
 const routeSchema = mongoose.Schema({
-    area:{
+    title:{
         type:String,
     },
     startPoint: {
