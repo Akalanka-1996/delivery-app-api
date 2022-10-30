@@ -9,7 +9,7 @@ const getLanes = asyncHandler(async (req, res) => {
 })
 
 const createLane = asyncHandler(async (req, res) => {
-    const { lane, estimatedTime} = req.body
+    const { lane, estimatedTime, routeId} = req.body
 
     if (!lane || !estimatedTime) {
         res.status(400)
