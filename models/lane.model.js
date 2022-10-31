@@ -8,6 +8,12 @@ const laneSchema = mongoose.Schema({
     estimatedTime: {
         type: Number
     },
+    hour: {
+        type: Number
+    },
+    min: {
+        type: Number
+    },
     user:{
         type: mongoose.Schema.Types.ObjectId,
         required:true,

@@ -9,17 +9,19 @@ const getLanes = asyncHandler(async (req, res) => {
 })
 
 const createLane = asyncHandler(async (req, res) => {
-    const { lane, estimatedTime, routeId} = req.body
+    const { lane, estimatedTime, routeId, hour, min} = req.body
 
-    if (!lane || !estimatedTime) {
+    if (!lane) {
         res.status(400)
         throw new Error("Please fill all the fields")
     } else {
         const routeLane = new Lane({
             user: req.user._id,
             lane,
-            estimatedTime,
-            routeId
+            // estimatedTime,
+            hour,
+            min,
+            routeId,
         })
 
         const createdLane = await routeLane.save()
