@@ -59,4 +59,39 @@ const deleteLane = asyncHandler(async (req, res) => {
 })
 
 
-module.exports = { createLane, deleteLane, getLanes }
+const getLaneByRoute = asyncHandler(async (req, res) => {
+    const route = await Route.findById(req.params.id)
+
+    if (route) {
+        res.json(route.lanes)
+    }
+})
+
+const getLaneById = asyncHandler(async (req, res) => {
+    const lane = await Lane.findById(req.params.id)
+
+    if (lane) {
+        res.json(lane)
+    }
+})
+
+const getLaneByName = asyncHandler(async (req, res) => {
+    const lane = await Lane.find({'lane': req.params.lane}).collation( { locale: 'en', strength: 1 } )
+
+    if(lane) {
+        res.json(lane)
+    }
+})
+
+const getLaneByRouteAndName = asyncHandler(async (req, res) => {
+    const lane = await Lane.findOne({'routeId': req.params.routeId, 'lane': req.params.lane})
+
+
+    if(lane) {
+        res.json(lane)
+    }
+})
+
+
+
+module.exports = { createLane, deleteLane, getLanes, getLaneByRoute, getLaneById, getLaneByName, getLaneByRouteAndName }
